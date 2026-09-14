@@ -151,4 +151,4 @@ int main()
     glfwTerminate (); // - Liberamos los recursos que ocupaba GLFW.
 
     return 0;
-}z
+}
