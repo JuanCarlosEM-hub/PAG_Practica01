@@ -29,6 +29,16 @@ void framebuffer_size_callback ( GLFWwindow *window, int width, int height )
     std::cout << "Resize callback called" << std::endl;
 }
 
+// - Esta función callback será llamada cada vez que se pulse una tecla
+// dirigida al área de dibujo OpenGL.
+void key_callback ( GLFWwindow *window, int key, int scancode, int action, int mods )
+{ if ( key == GLFW_KEY_ESCAPE && action == GLFW_PRESS )
+{ glfwSetWindowShouldClose(window, GLFW_TRUE);
+}
+    std::cout << "Key callback called" << std::endl;
+}
+
+
 int main()
 { std::cout << "Starting Application PAG - Prueba 01" << std::endl;
     // - Inicializa GLFW. Es un proceso que sólo debe realizarse una vez en la aplicación
