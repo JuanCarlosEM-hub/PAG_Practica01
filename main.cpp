@@ -63,6 +63,15 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
     std::cout << "Movida la rueda del ratón " << xoffset
               << " Unidades en horizontal y " << yoffset
               << " unidades en vertical" << std::endl;
+
+    // Arreglo para guardar los componentes (R, G, B, A)
+    float colorActual[4];
+
+    // Consulta a OpenGL el color de borrado actual
+    glGetFloatv(GL_COLOR_CLEAR_VALUE, colorActual);
+
+
+
 }
 
 int main()
