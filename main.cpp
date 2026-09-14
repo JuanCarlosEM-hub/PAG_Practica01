@@ -9,7 +9,18 @@ void error_callback ( int errno, const char* desc )
     std::cout << "Error de GLFW número " << errno << ": " << aux << std::endl;
 }
 
-
+// - Esta función callback será llamada cada vez que el área de dibujo
+// OpenGL deba ser redibujada.
+void window_refresh_callback ( GLFWwindow *window )
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // - GLFW usa un doble buffer para que no haya parpadeo. Esta orden
+    // intercambia el buffer back (que se ha estado dibujando) por el
+    // que se mostraba hasta ahora front. Debe ser la última orden de
+    // este callback
+    glfwSwapBuffers ( window );
+    std::cout << "Refresh callback called" << std::endl;
+}
 
 int main()
 { std::cout << "Starting Application PAG - Prueba 01" << std::endl;
