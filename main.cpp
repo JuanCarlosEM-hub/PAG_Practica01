@@ -1,5 +1,6 @@
 #include <iostream>
 // IMPORTANTE: El include de GLAD debe estar siempre ANTES de el de GLFW
+#include <random>
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -61,8 +62,61 @@ void mouse_button_callback ( GLFWwindow *window, int button, int action, int mod
 void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
 {
     std::cout << "Movida la rueda del ratón " << xoffset
+    //Esta salida de consola no tiene sentido puesto que la rueda solo tiene sentido vertical, a no ser que usemos el mousepad
               << " Unidades en horizontal y " << yoffset
               << " unidades en vertical" << std::endl;
+
+    // Arreglo para guardar los componentes (R, G, B, A)
+    float colorActual[4];
+
+    // Consulta a OpenGL el color de borrado actual
+    glGetFloatv(GL_COLOR_CLEAR_VALUE, colorActual);
+
+    /*
+     * Esta función es correcta, no obstante, como cambiamos todos los tonos por igual solo se ve un cambio de grises
+     * Vamos a "complicar" un poco más el ejercico buscando aleaoriedad en los colores y teniendo en cuenta el sentido de giro
+    for ( int i = 0; i < 3; ++i)
+    {
+        if (colorActual[i] >=0.9)
+        {
+            colorActual[i] =0.0;
+        }else
+        {
+            colorActual[i] +=0.1;
+        }
+    }*/
+
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // Buscamos el valor flotante mínimo justo por encima de 0.0
+    double minimo_exclusivo = std::nextafter(0.0, 1.0);
+
+    // std::uniform_real_distribution incluye el límite inferior pero excluye el superior: [min, 1.0)
+    std::uniform_real_distribution<double> distrib(minimo_exclusivo, 1.0);
+
+    // Generar el número decimal estrictamente entre 0 y 1
+    double valor_sum_nuevo_color = distrib(gen);
+
+    // Aplicamos el nuevo color a cada elemento
+    for ( int i = 0; i < 3; i++ )
+    {
+        // Sin comprobar, modificamos el elemento del array
+        // Para que el color se vea distinto, multiplicamos la posicion del elemento por el sentido de rotación. De este modo algunos elementos suman y otros restan
+        // Aclarar, que aunque algunos sumen y otros resten, siempre suman o restan los mismo respectivamente el eje de la rueda
+        colorActual[i] = valor_sum_nuevo_color * i *yoffset;
+
+        //Comprobamos si se sale de rango por el límite superior
+        if ( colorActual[i] > 1.0 ) {
+            colorActual[i] = 0; //Lo establecemos a 0 si es inválido
+        }else if ( colorActual[i] < 0.0 )
+        {
+            colorActual[i] = 1.0; // Lo establecemos a 1 si es inválido
+        }
+    }
+    // Aplicamos en el fondo
+    glClearColor(colorActual[0], colorActual[1], colorActual[2], colorActual[3]);
+
 }
 
 int main()
@@ -151,4 +205,4 @@ int main()
     glfwTerminate (); // - Liberamos los recursos que ocupaba GLFW.
 
     return 0;
-}z
+}
