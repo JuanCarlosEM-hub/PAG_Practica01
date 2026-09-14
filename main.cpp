@@ -3,6 +3,13 @@
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
+// - Esta función callback será llamada cuando GLFW produzca algún error
+void error_callback ( int errno, const char* desc )
+{ std::string aux (desc);
+    std::cout << "Error de GLFW número " << errno << ": " << aux << std::endl;
+}
+
+
 
 int main()
 { std::cout << "Starting Application PAG - Prueba 01" << std::endl;
