@@ -61,7 +61,8 @@ void mouse_button_callback ( GLFWwindow *window, int button, int action, int mod
 // del ratón sobre el área de dibujo OpenGL.
 void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
 {
-    std::cout << "Movida la rueda del ratón " << xoffset //Esta salida de consola no tiene sentido puesto que la rueda solo tiene sentido vertical
+    std::cout << "Movida la rueda del ratón " << xoffset
+    //Esta salida de consola no tiene sentido puesto que la rueda solo tiene sentido vertical, a no ser que usemos el mousepad
               << " Unidades en horizontal y " << yoffset
               << " unidades en vertical" << std::endl;
 
