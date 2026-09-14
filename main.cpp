@@ -70,6 +70,16 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
     // Consulta a OpenGL el color de borrado actual
     glGetFloatv(GL_COLOR_CLEAR_VALUE, colorActual);
 
+    for ( int i = 0; i < 3; ++i)
+    {
+        if (colorActual[i] >=0.9)
+        {
+            colorActual[i] =0.0;
+        }else
+        {
+            colorActual[i] +=0.1;
+        }
+    }
 
 
 }
