@@ -60,7 +60,7 @@ void mouse_button_callback ( GLFWwindow *window, int button, int action, int mod
 // del ratón sobre el área de dibujo OpenGL.
 void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
 {
-    std::cout << "Movida la rueda del ratón " << xoffset
+    std::cout << "Movida la rueda del ratón " << xoffset //Esta salida de consola no tiene sentido puesto que la rueda solo tiene sentido vertical
               << " Unidades en horizontal y " << yoffset
               << " unidades en vertical" << std::endl;
 
@@ -70,6 +70,9 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
     // Consulta a OpenGL el color de borrado actual
     glGetFloatv(GL_COLOR_CLEAR_VALUE, colorActual);
 
+    /*
+     * Esta función es correcta, no obstante, como cambiamos todos los tonos por igual solo se ve un cambio de grises
+     * Vamos a "complicar" un poco más el ejercico buscando aleaoriedad en los colores y teniendo en cuenta el sentido de giro
     for ( int i = 0; i < 3; ++i)
     {
         if (colorActual[i] >=0.9)
@@ -79,7 +82,9 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
         {
             colorActual[i] +=0.1;
         }
-    }
+    }*/
+
+
 
     // Aplicar nuevo color
     glClearColor(colorActual[0], colorActual[1], colorActual[2], colorActual[3]);
