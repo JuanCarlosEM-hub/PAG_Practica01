@@ -1,5 +1,6 @@
 #include <iostream>
 // IMPORTANTE: El include de GLAD debe estar siempre ANTES de el de GLFW
+#include <random>
 #include <GLAD/glad.h>
 #include <GLFW/glfw3.h>
 
@@ -84,6 +85,17 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
         }
     }*/
 
+    std::random_device rd;
+    std::mt19937 gen(rd());
+
+    // Buscamos el valor flotante mínimo justo por encima de 0.0
+    double minimo_exclusivo = std::nextafter(0.0, 1.0);
+
+    // std::uniform_real_distribution incluye el límite inferior pero excluye el superior: [min, 1.0)
+    std::uniform_real_distribution<double> distrib(minimo_exclusivo, 1.0);
+
+    // Generar el número decimal estrictamente entre 0 y 1
+    double valor_sum_nuevo_color = distrib(gen);
 
 
     // Aplicar nuevo color
