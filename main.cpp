@@ -81,6 +81,8 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
         }
     }
 
+    // Aplicar nuevo color
+    glClearColor(colorActual[0], colorActual[1], colorActual[2], colorActual[3]);
 
 }
 
