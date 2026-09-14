@@ -97,8 +97,23 @@ void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
     // Generar el número decimal estrictamente entre 0 y 1
     double valor_sum_nuevo_color = distrib(gen);
 
+    // Aplicamos el nuevo color a cada elemento
+    for ( int i = 0; i < 3; i++ )
+    {
+        // Sin comprobar, modificamos el elemento del array
+        // Para que el color se vea distinto, multiplicamos la posicion del elemento por el sentido de rotación. De este modo algunos elementos suman y otros restan
+        // Aclarar, que aunque algunos sumen y otros resten, siempre suman o restan los mismo respectivamente el eje de la rueda
+        colorActual[i] = valor_sum_nuevo_color * i *yoffset;
 
-    // Aplicar nuevo color
+        //Comprobamos si se sale de rango por el límite superior
+        if ( colorActual[i] > 1.0 ) {
+            colorActual[i] = 0; //Lo establecemos a 0 si es inválido
+        }else if ( colorActual[i] < 0.0 )
+        {
+            colorActual[i] = 1.0; // Lo establecemos a 1 si es inválido
+        }
+    }
+    // Aplicamos en el fondo
     glClearColor(colorActual[0], colorActual[1], colorActual[2], colorActual[3]);
 
 }
