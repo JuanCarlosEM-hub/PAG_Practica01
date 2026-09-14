@@ -38,6 +38,19 @@ void key_callback ( GLFWwindow *window, int key, int scancode, int action, int m
     std::cout << "Key callback called" << std::endl;
 }
 
+// - Esta función callback será llamada cada vez que se pulse algún botón
+// del ratón sobre el área de dibujo OpenGL.
+void mouse_button_callback ( GLFWwindow *window, int button, int action, int mods )
+{
+    if ( action == GLFW_PRESS )
+    {
+        std::cout << "Pulsado el botón: " << button << std::endl;
+    }
+    else if ( action == GLFW_RELEASE )
+    {
+        std::cout << "Soltado el botón: " << button << std::endl;
+    }
+}
 
 int main()
 { std::cout << "Starting Application PAG - Prueba 01" << std::endl;
