@@ -52,6 +52,15 @@ void mouse_button_callback ( GLFWwindow *window, int button, int action, int mod
     }
 }
 
+// - Esta función callback será llamada cada vez que se mueva la rueda
+// del ratón sobre el área de dibujo OpenGL.
+void scroll_callback ( GLFWwindow *window, double xoffset, double yoffset )
+{ std::cout << "Movida la rueda del ratón " << xoffset
+<< " Unidades en horizontal y " << yoffset
+<< " unidades en vertical" << std::endl;
+}
+
+
 int main()
 { std::cout << "Starting Application PAG - Prueba 01" << std::endl;
     // - Inicializa GLFW. Es un proceso que sólo debe realizarse una vez en la aplicación
